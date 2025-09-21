@@ -1,0 +1,6 @@
+# requirements.txt
+# Lists Python libraries needed to run the project.
+# Currently, no external libraries are required (uses Python's built-in collections).
+# Included for future scalability (e.g., testing with pytest).
+streamlit==1.39.0 # For the web-based interactive game
+# No dependencies required for main.py
