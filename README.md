@@ -1,2 +1,13 @@
-# Game-of-Missonaries-and-Cannable
-Move all 3 missionaries and 3 cannibals from the starting bank to the destination bank of a river. A boat is available that can carry a maximum of two people at a time. The boat cannot cross the river on its own; it must have at least one person in it to move. 
+# Missionaries and Cannibals Game
+
+Solve the classic puzzle: Get 3 missionaries (🧑) and 3 cannibals (👹) across a river safely.
+
+## Setup
+- Clone: `git clone https://github.com/Sumit-Nayek/Game-of-Missonaries-and-Cannable.git`
+- Install: `pip install -r requirements.txt`
+- Run console solver: `python src/main.py`
+- Run interactive game: `streamlit run src/app.py` (opens browser)
+
+## Files
+- `src/main.py`: BFS algorithm for solving.
+- `src/app.py`: Streamlit app for playing.
