@@ -1,7 +1,3 @@
-# main.py
-# Solves the Missionaries and Cannibals Problem: Get 3 missionaries and 3 cannibals
-# across a river using a boat that holds up to 2 people, without cannibals outnumbering
-# missionaries on either side.
 
 from collections import deque  # Used for the queue in BFS (like a line of tasks)
 
@@ -53,27 +49,3 @@ def bfs():
                 new_path = path + [move]  # Add move to path
                 queue.append((child, new_path))  # Add to queue
     return None  # No solution found
-
-# Run the program and print the solution
-def main():
-    solution = bfs()  # Find the solution
-    if solution:
-        print("Solution found in", len(solution), "moves:")
-        left_m, left_c, boat = INITIAL  # Start with initial state
-        for i, (dm, dc, direction) in enumerate(solution, 1):
-            # Update counts based on move
-            if direction == 'right':
-                left_m -= dm
-                left_c -= dc
-            else:  # left
-                left_m += dm
-                left_c += dc
-            # Print each step
-            print(f"Move {i}: Send {dm} missionaries and {dc} cannibals to the {direction}.")
-            print(f"Left: {left_m}M {left_c}C | Right: {3-left_m}M {3-left_c}C | Boat on {'left' if boat else 'right'}")
-            boat = 1 - boat  # Flip boat for next move
-    else:
-        print("No solution found.")
-
-if __name__ == "__main__":
-    main()  # Run the program
