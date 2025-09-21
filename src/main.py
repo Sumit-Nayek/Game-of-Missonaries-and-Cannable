@@ -1,7 +1,9 @@
-# Solves the Missionaries and Cannibals Problem using BFS.
+# src/main.py
+# Core logic for Missionaries and Cannibals using BFS.
+
 from collections import deque
 
-INITIAL = (3, 3, 1)  # (m_left, c_left, boat_left)
+INITIAL = (3, 3, 1)  # (missionaries_left, cannibals_left, boat_on_left)
 GOAL = (0, 0, 0)
 MOVES = [(1, 0), (2, 0), (0, 1), (0, 2), (1, 1)]
 
