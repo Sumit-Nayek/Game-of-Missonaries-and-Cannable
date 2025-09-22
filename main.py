@@ -44,6 +44,9 @@
 # main.py
 # Core logic for Missionaries and Cannibals using BFS.
 
+# main.py
+# Core logic for Missionaries and Cannibals using BFS.
+
 from collections import deque
 
 INITIAL = (3, 3, 1)  # (missionaries_left, cannibals_left, boat_on_left)

@@ -86,6 +86,9 @@
 # app.py
 # Streamlit app for Missionaries and Cannibals with Undo and animations
 
+# app.py
+# Streamlit app for Missionaries and Cannibals with Undo, animations, right-aligned Reset, and 2-column history
+
 import streamlit as st
 from main import is_valid, get_children, bfs  # Import from main.py (same dir)
 
@@ -107,14 +110,6 @@ def display_state(state):
     return f"Left: {left} | {'Boat ~~~ ' if boat else '~~~ Boat '}Right: {right}"
 
 # Reset game
-def reset_game():
-    st.session_state.state = (3, 3, 1)
-    st.session_state.moves = []
-    st.session_state.history = [(3, 3, 1)]
-    st.session_state.game_over = False
-    st.session_state.message = ""
-
-# Undo last move
 def reset_game():
     st.session_state.state = (3, 3, 1)
     st.session_state.moves = []
@@ -175,27 +170,37 @@ if not st.session_state.game_over:
                     st.session_state.message = "Invalid move! 😕"
                 st.rerun()
 
+# Display message
+if st.session_state.message:
+    st.write(st.session_state.message)
+
+# Move history in 2-column format
+if st.session_state.moves:
+    st.subheader("Move History")
+    col1, col2 = st.columns([1, 3])  # 1:3 ratio for Move # and Description
+    with col1:
+        st.write("**Move #**")
+    with col2:
+        st.write("**Description**")
+    for i, (dm, dc, direction) in enumerate(st.session_state.moves, 1):
+        label = f"{'🧑' * dm}{'👹' * dc}"
+        with col1:
+            st.write(f"Move {i}")
+        with col2:
+            st.write(f"Sent {label} to the {direction}")
+
 # Undo button
 if st.session_state.moves and not st.session_state.game_over:
     if st.button("Undo Last Move"):
         undo_move()
         st.rerun()
 
-# Display message
-if st.session_state.message:
-    st.write(st.session_state.message)
-
-# Move history
-if st.session_state.moves:
-    st.subheader("Move History")
-    for i, (dm, dc, direction) in enumerate(st.session_state.moves, 1):
-        label = f"{'🧑' * dm}{'👹' * dc}"
-        st.write(f"Move {i}: Sent {label} to the {direction}")
-
-# Reset button
-if st.button("Reset Game"):
-    reset_game()
-    st.rerun()
+# Reset button (right-aligned)
+cols = st.columns([4, 1])  # 80% empty left, 20% right for button
+with cols[1]:
+    if st.button("Reset Game"):
+        reset_game()
+        st.rerun()
 
 # BFS solution button
 if st.button("Show BFS Solution"):
@@ -217,5 +222,5 @@ with st.expander("How to Play"):
     - **Goal**: Move all 3 missionaries (🧑) and 3 cannibals (👹) from left to right.
     - **Boat**: Holds up to 2 people, needs at least 1 to move.
     - **Rule**: Cannibals can't outnumber missionaries on either side (unless no missionaries).
-    - **Controls**: Click move buttons, use Undo to revert, Reset to start over, or Show BFS Solution for the answer.
+    - **Controls**: Click move buttons, use Undo to revert, Reset (right side) to start over, or Show BFS Solution for the answer.
     """)
